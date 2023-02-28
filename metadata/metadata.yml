@@ -1,0 +1,21 @@
+metadata_version: 1
+name: 'Reusability Report:   Few-shot learning creates predictive models of drug response
+  that translate from   high-throughput screens to individual patients'
+description: 'This is the code to replicate all figures from "Reusability Report:
+  Few-shot learning creates predictive models of drug response that translate from
+  high-throughput screens to individual patients". The goal of this paper is to reproduce
+  the results from the Nature Cancer paper "Few-shot learning creates predictive models
+  of drug response that translate from high-throughput screens to individual patients"'
+tags:
+- TCRP
+- pharmacogenomics
+authors:
+- name: 'Emily So '
+  affiliations:
+  - name: University Health Network
+- name: 'Grace Yu '
+  affiliations:
+  - name: University of Toronto
+- name: Benjamin Haibe-Kains
+  affiliations:
+  - name: University Health Network

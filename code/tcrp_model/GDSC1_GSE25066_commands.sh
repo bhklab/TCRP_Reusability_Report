@@ -1,0 +1,2 @@
+set -ex
+python3 /root/capsule/code/tcrp_model/model/MAML_DRUG.py --dataset GDSC1_GSE25066 --tissue GSE25066_Breast --drug Paclitaxel --K 10 --num_trials 20 --tissue_num 6 --meta_batch_size 10 --meta_lr 0.001 --inner_lr 0.001 --layer 2 --run_name 210803_drug-baseline-models
