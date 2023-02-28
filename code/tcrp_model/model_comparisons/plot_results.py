@@ -259,19 +259,32 @@ if (reference=="GDSC1") and (analysis_tissue=="PDTC"):
     diff_list = []
     for i,j in zip(ground_truth,mean_list):
         diff_list.append(abs(i-j))
+    index = drugs
+    index.reverse()
+    diff_list.reverse()
+    
+    positive_indicies = [i for i in range(0,len(diff_list)) if diff_list[i] > 0]
+    unmapped_drugs = [i for i in range(0,len(index)) if index[i] not in tcrp_results["Drug"].tolist()]
+    
     fig = plt.figure()
     fig, ax = plt.subplots()
 
+    fig = plt.figure()
+
+    fig, ax = plt.subplots()
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
     fig.set_size_inches(8,12)
-    diff_list.reverse()
-    drugs.reverse()
-    TCRP = plt.scatter(diff_list,drugs,color="red",s=80)
-    TCRP.set_label("TCRP")
-    plt.xlabel("Correlation (predicted,actual)")
-    plt.xlim(-0.2,0.6)
-    #plt.xticks([-0.5,-0.3,-0.1,0.1,0.3,0.5,0.7])
-    #plt.tight_layout()
-    plt.legend(loc='lower right',prop={'size': 6})
-    plt.savefig("/results/difference_dotplot.png")
+    barlist = plt.barh(index, diff_list, align='center', color='blue', zorder=10, alpha=0.5)
+    for j in positive_indicies:
+        barlist[int(j)].set_color('r')
+    for j in unmapped_drugs:
+        barlist[int(j)].set_color('w')
+    #plt.title("Difference between published objective value and reproduced objective value")
+    plt.xlabel("Difference in correlation values")
+    plt.ylabel("Drugs")
+    #plt.set_title(title0, fontsize=18, pad=15, color=color_red, **hfont)
+    #plt.barh(index, diff_list, align='center', color=color_blue, zorder=10)
+    #plt.set_title(title1, fontsize=18, pad=15, color=color_blue, **hfont)
+    plt.tight_layout()
+    plt.savefig("/results/difference_barplot.png") 
