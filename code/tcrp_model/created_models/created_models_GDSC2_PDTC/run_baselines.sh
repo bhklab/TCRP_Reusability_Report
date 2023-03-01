@@ -1,0 +1,9 @@
+set -ex 
+bash /code/tcrp_model/created_models/created_models_GDSC2_PDTC/baseline_cmd/subcommands/subcommands_baseline_drugs0.sh
+bash /code/tcrp_model/created_models/created_models_GDSC2_PDTC/baseline_cmd/subcommands/subcommands_baseline_drugs1.sh
+bash /code/tcrp_model/created_models/created_models_GDSC2_PDTC/baseline_cmd/subcommands/subcommands_baseline_drugs2.sh
+bash /code/tcrp_model/created_models/created_models_GDSC2_PDTC/baseline_cmd/subcommands/subcommands_baseline_drugs3.sh
+bash /code/tcrp_model/created_models/created_models_GDSC2_PDTC/baseline_cmd/subcommands/subcommands_baseline_drugs4.sh
+bash /code/tcrp_model/created_models/created_models_GDSC2_PDTC/baseline_cmd/subcommands/subcommands_baseline_drugs5.sh
+bash /code/tcrp_model/created_models/created_models_GDSC2_PDTC/baseline_cmd/subcommands/subcommands_baseline_drugs6.sh
+bash /code/tcrp_model/created_models/created_models_GDSC2_PDTC/baseline_cmd/subcommands/subcommands_baseline_drugs7.sh
