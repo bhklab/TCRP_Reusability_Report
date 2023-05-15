@@ -3,8 +3,12 @@ set -ex
 IFS='_' read -r -a array <<< $1
 REFERENCE=${array[0]}
 TRANSFER=${array[1]}
+if [[ "$1" == *"supp"* ]]; then
+ bash /code/tcrp_model/supp_GDSC1_PDTC_commands.sh
+ bash /code/tcrp_model/created_models/created_models_GDSC1_PDTC_supp/run_baselines.sh
+else
 echo "TCRP prediction is being performed on ${TRANSFER}, trained on ${REFERENCE}"
-#bash /code/fewshot.sh
 bash /code/tcrp_model/created_models/created_models_${REFERENCE}_${TRANSFER}/run_baselines.sh
 bash /code/tcrp_model/${REFERENCE}_${TRANSFER}_commands.sh
 python3 /code/tcrp_model/model_comparisons/plot_results.py --reference ${REFERENCE} --tissue ${TRANSFER}
+fi  

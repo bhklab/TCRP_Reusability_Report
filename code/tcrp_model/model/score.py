@@ -94,8 +94,8 @@ def evaluate_new(net, loader, train_flag, weights=None):
 
 	rho, pval = stats.spearmanr( test_predict.data.cpu().numpy() ,test_label.data.cpu().numpy() )
 
-	#return float(total_loss) / test_label.size()[0], pear_corr, rho, test_predict, test_label
-	return float(total_loss) / test_label.size()[0], pear_corr, test_predict, test_label
+	return float(total_loss) / test_label.size()[0], pear_corr, rho, test_predict, test_label
+	#return float(total_loss) / test_label.size()[0], pear_corr, test_predict, test_label
 
 def evaluate_cv(net, loader, weights=None):
 	#evaluate the net on the data in the loader

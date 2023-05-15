@@ -127,7 +127,11 @@ fig.set_size_inches(10,10)
 
 ax.spines['right'].set_visible(False)
 ax.spines['top'].set_visible(False)
-color_dict={"Linear Regression":"green","Neural Network":"purple","Random Forest":"teal","Nearest Neighbour": "blue","TCRP":"red"}
+if (reference=="GDSC1") and (analysis_tissue=="PDTC"):
+    color_dict={"Linear Regression":"#99C047","Neural Network":"#5D488D","Random Forest":"#52A3B3","Nearest Neighbour": "#506A99","TCRP":"#DB352D"}
+else:
+    color_dict={"Linear Regression":"green","Neural Network":"purple","Random Forest":"teal","Nearest Neighbour": "blue","TCRP":"red"}
+
 for model, ps in results_by_baseline.items(): 
     p = ax.plot(np.arange(11), np.mean(ps, axis=0),label=model,marker='o',color=color_dict[model])
     if (reference=="GDSC1") and (analysis_tissue=="PDTC"):
@@ -232,21 +236,21 @@ if (reference=="GDSC1") and (analysis_tissue=="PDTC"):
     ax.spines['top'].set_visible(False)
     fig.set_size_inches(8,12)
 
-    RF = plt.scatter(reverse_tuple(new_RF_y),drugs,color="blue",s=100, alpha=0.3)
+    RF = plt.scatter(reverse_tuple(new_RF_y),drugs,color="#52A3B3",s=100)
     RF.set_label("Random Forest")
-    linear = plt.scatter(reverse_tuple(new_linear_y),drugs,color="green",s=100, alpha=0.3)
+    linear = plt.scatter(reverse_tuple(new_linear_y),drugs,color="#99C047",s=100)
     linear.set_label("Linear Regression")
-    KNN = plt.scatter(reverse_tuple(new_KNN_y),drugs,color="navy",s=100, alpha=0.3)
+    KNN = plt.scatter(reverse_tuple(new_KNN_y),drugs,color="#506A99",s=100)
     KNN.set_label("Nearest Neighbours")
-    NN = plt.scatter(reverse_tuple(new_NN_y),drugs,color="purple",s=100, alpha=0.3)
+    NN = plt.scatter(reverse_tuple(new_NN_y),drugs,color="#796AE7",s=100)
     NN.set_label("Neural Network")
-    TCRP = plt.scatter(reverse_tuple(new_TCRP_y),drugs,color="red",s=100)
+    TCRP = plt.scatter(reverse_tuple(new_TCRP_y),drugs,color="#DB352D",s=100)
     TCRP.set_label("TCRP")
     plt.xlabel("Correlation (predicted,actual)")
     plt.xlim(-0.5,0.8)
     plt.xticks([-0.5,-0.3,-0.1,0.1,0.3,0.5,0.7])
     #plt.tight_layout()
-    plt.legend(loc='lower right',prop={'size': 6})
+    #plt.legend(loc='lower right',prop={'size': 6})
     plt.savefig(f"/results/{reference}_{analysis_tissue}_dotplot.png")
     ground_truth = pd.read_csv("/data/drug_performance.csv")["corr"].tolist()
     drugs = pd.read_csv("/data/drug_performance.csv")["Drug"].tolist()

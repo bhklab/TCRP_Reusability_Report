@@ -104,7 +104,7 @@ def zero_shot_test(unseen_test_loader):
 	
 	unseen_tissue_model.eval()
 
-	mtest_loss, mtest_pear_corr, test_prediction, test_true_label = evaluate_new( unseen_tissue_model, unseen_test_loader, 0 )
+	mtest_loss, mtest_pear_corr, mtest_spear_corr, test_prediction, test_true_label = evaluate_new( unseen_tissue_model, unseen_test_loader, 0 )
 
 	return mtest_loss, mtest_pear_corr, test_prediction, test_true_label
 
@@ -132,8 +132,8 @@ def unseen_tissue_learn(unseen_train_loader, unseen_test_loader):
 		unseen_opt.step()
 
 	# Test on the rest of cell lines in this tissue (unseen_test_loader)
-	mtrain_loss, mtrain_pear_corr, _, _ = evaluate_new( unseen_tissue_model, unseen_train_loader,1 )
-	mtest_loss, mtest_pear_corr, test_prediction, test_true_label = evaluate_new( unseen_tissue_model, unseen_test_loader,0 )
+	mtrain_loss, mtrain_pear_corr, _, _, _ = evaluate_new( unseen_tissue_model, unseen_train_loader,1 )
+	mtest_loss, mtest_pear_corr,mtest_spear_corr, test_prediction, test_true_label = evaluate_new( unseen_tissue_model, unseen_test_loader,0 )
 
 	return mtrain_loss, mtrain_pear_corr, mtest_loss, mtest_pear_corr, test_prediction, test_true_label
 
@@ -310,6 +310,7 @@ for epoch in range( args.num_updates ):
 
 base_line_outpath = f"/results/{dataset}/TCRP_performances/" + args.drug + '/' + args.tissue + '/'
 os.system("mkdir -p {}".format(base_line_outpath))
+
 new_test_corr = test_corr[test_corr != 0]
 if isinstance(zero_test_corr,int):
 	corr_zero = zero_test_corr
@@ -331,5 +332,6 @@ np.savez(
 )
 with open(log_file, 'w') as f: 
     f.write(f"Best corr meta training:,{test_corr[best_epoch]}\n")
+    f.write(f"Best epoch is {best_epoch}\n")
     f.write(f"zero,{zero_test_corr}\n")
 f.close()
