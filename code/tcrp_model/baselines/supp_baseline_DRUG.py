@@ -224,7 +224,7 @@ def train_linear_baseline(Regressor, train_X, train_y, zero_train, zero_test,
 			
 			inner_p.append(out)
 		performances.append(inner_p)
-
+	performances = np.nan_to_num(performances)
 	performances = np.vstack(performances)
 
 	return zero_p, performances
@@ -262,8 +262,8 @@ def torch_train(model,criterion,optimizer,epoch,test_X,test_y):
 	# 	print('Epoch : ',epoch+1, '\t', 'loss :', loss_val)
 	saved_predictions = predictions[1].cpu().detach().numpy()
 	saved_predictions = (np.mean(saved_predictions,axis=1)).reshape((test_y.shape[0],1))
-	#out = np.corrcoef(np.vstack([saved_predictions.ravel(), original_test_y.ravel()]))
-	rho,pval = spearmanr(np.vstack([saved_predictions.ravel(), original_test_y.ravel()]))
+	out = np.corrcoef(np.vstack([saved_predictions.ravel(), original_test_y.ravel()]))
+	rho,pval = spearmanr(np.transpose(np.vstack([saved_predictions.ravel(), original_test_y.ravel()])))
 	return rho
 def train_cnn(train_X, train_y, zero_train, zero_test, 
 	unseen_train, unseen_test, epoch=20,**kwargs): 
@@ -313,9 +313,14 @@ def train_cnn(train_X, train_y, zero_train, zero_test,
 
 def make_predictions(model, X, y): 
 	predictions = model.predict(X)
-	out = np.corrcoef(np.vstack([predictions.ravel(), y.ravel()]))
-
-	return out[0,1]
+	input = np.vstack([predictions.ravel(), y.ravel()])
+	out = np.corrcoef(input)
+	rho,pval = spearmanr(np.transpose(input))
+	# if isinstance(rho,float):
+	# 	return np.full(out.shape,rho)
+	# else:
+	# 	return rho
+	return rho
 
 
 base_line_outpath = f"/results/{dataset}/baseline_performances/" + args.drug + '/' + args.tissue + '/'
