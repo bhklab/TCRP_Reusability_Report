@@ -1,10 +1,8 @@
-# Reusability Report: Few-shot learning creates predictive models of drug response that translate from high-throughput screens to individual patients (Version 2.3)
+# Reusability Report: Few-shot learning creates predictive models of drug response that translate from high-throughput screens to individual patients (Version 2.5)
 
 This is the code to replicate all figures from "Reusability Report: Few-shot learning creates predictive models of drug response that translate from high-throughput screens to individual patients". The goal of this paper is to reproduce the results from the Nature Cancer paper "Few-shot learning creates predictive models of drug response that translate from high-throughput screens to individual patients"[1]
 
-The original compute capsule can be found [here](https://codeocean.com/capsule/8411716/tree/v2)
-
-There are multiple different ways you can interact with the Compute Capsule/codebase 
+There are multiple different ways you can interact with this capsule 
 # Reproducing results of Reusability Report 
 1. Use the App Panel dropdown on the left sidebar to select a reference-validation combination that you would like to run few-shot TCRP analysis on, as well as baseline comparison against established machine learning methods 
 2. Click "Reproducible Run" at the top right of the capsule
@@ -29,7 +27,8 @@ There are multiple different ways you can interact with the Compute Capsule/code
 5. Use the notebook `/code/tcrp_model/model/find_max_run.ipynb` to find the most optimal run (substituting tissue/dataset/drug name appropriately). This notebook will tell you which output file has the best TCRP correlation, which you can search for in the corresponding subcommands script to find the full command.
 6. If, alternatively, you would like to calculate additional performance metrics for measuring TCRP in comparison to baseline results (the default is Pearson's correlation), you can visit `/code/tcrp_model/model/new_score.ipynb` to view how that information can be generated. The new arrays containing the new perforamnce metric should then be saved to replace the original `TCRP_performance.npz` for each dataset-drug-tissue.
 6. For each drug, rerun the optimal TCRP command found in step 5 to replace the current result with the optimized result. 
-7. Run `/code/tcrp_model/model_comparisons/plot_results.py` with the corresponding flags of `--reference {reference} --validation {validation}`.
+7. Run `/code/tcrp_model/model_comparisons/plot_results.py` with the corresponding flags of `--reference {reference} --validation {validation}`
+- if you would like to, without rerunning inference code, plot reproducibility results - use `/data/original_data/original_TCRP` and `/data/original_data/spear_TCRP` in combination with the notebook `/code/tcrp_model/model_comparisons/1-gather-baselines-and-fewshot.ipynb`.
 8. Your baseline comparison vs. TCRP PNG file will be saved in `/results/`
 
 
