@@ -1,4 +1,4 @@
-# Reusability Report: Few-shot learning creates predictive models of drug response that translate from high-throughput screens to individual patients (Version 2.5)
+# Reusability Report: Few-shot learning creates predictive models of drug response that translate from high-throughput screens to individual patients (Version 2.6)
 
 This is the code to replicate all figures from "Reusability Report: Few-shot learning creates predictive models of drug response that translate from high-throughput screens to individual patients". The goal of this paper is to reproduce the results from the Nature Cancer paper "Few-shot learning creates predictive models of drug response that translate from high-throughput screens to individual patients"[1]
 
